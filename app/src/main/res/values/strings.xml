@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FavFoodRoom</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_food_and_person_to_show">No food and person to show</string>
+    <string name="add_entry">Add entry</string>
+    <string name="clear_entries">clear entries</string>
+</resources>

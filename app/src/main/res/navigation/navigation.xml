@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/viewfavfoodFragment">
+
+    <fragment
+        android:id="@+id/addfavfoodFragment"
+        android:name="com.example.favfoodroom.addfavfood.AddfavfoodFragment"
+        android:label="AddfavfoodFragment" />
+    <fragment
+        android:id="@+id/viewfavfoodFragment"
+        android:name="com.example.favfoodroom.viewfavfood.ViewfavfoodFragment"
+        android:label="ViewfavfoodFragment" >
+        <action
+            android:id="@+id/action_viewfavfoodFragment_to_addfavfoodFragment"
+            app:destination="@id/addfavfoodFragment" />
+    </fragment>
+</navigation>
