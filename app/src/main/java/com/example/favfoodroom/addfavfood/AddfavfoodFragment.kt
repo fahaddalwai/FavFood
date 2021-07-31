@@ -1,17 +1,15 @@
 package com.example.favfoodroom.addfavfood
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.favfoodroom.R
 import com.example.favfoodroom.database.FoodDatabase
 import com.example.favfoodroom.databinding.FragmentAddfavfoodBinding
-import com.example.favfoodroom.viewfavfood.ViewfavfoodViewModelFactory
 
 
 class AddfavfoodFragment : Fragment() {
@@ -44,7 +42,15 @@ class AddfavfoodFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
+        viewModel.putFoodHolderValue.observe(viewLifecycleOwner, {
+            if(it){
+                viewModel.nameSetter(binding.nameEditText.text.toString())
+                viewModel.foodSetter(binding.foodEditText.text.toString())
+                viewModel.updateFoodHolderValue()
+                viewModel.putFoodHolderValueToFalse()
 
+            }
+        })
 
         return binding.root
     }

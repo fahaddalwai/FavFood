@@ -10,7 +10,7 @@ import androidx.room.Update
 interface FoodDatabaseDao {
 
     @Insert
-    suspend fun insert(food:Food)              //insert a food data item
+    suspend fun insert(food: com.example.favfoodroom.database.Food)              //insert a food data item
 
     @Update
     suspend fun update(food:Food)              //update food data item
