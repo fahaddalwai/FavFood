@@ -38,14 +38,13 @@ class AddfavfoodFragment : Fragment() {
 
         // Set the viewmodel for databinding - this allows the bound layout access
         // to all the data in the ViewModel
+
         binding.addfavfoodViewModel = viewModel
         binding.lifecycleOwner = this
 
 
         viewModel.putFoodHolderValue.observe(viewLifecycleOwner, {
             if(it){
-                viewModel.nameSetter(binding.nameEditText.text.toString())
-                viewModel.foodSetter(binding.foodEditText.text.toString())
                 viewModel.updateFoodHolderValue()
                 viewModel.putFoodHolderValueToFalse()
 
