@@ -5,4 +5,6 @@
     <string name="no_food_and_person_to_show">No food and person to show</string>
     <string name="add_entry">Add entry</string>
     <string name="clear_entries">clear entries</string>
+    <string name="Added_message">entry has been added</string>
+
 </resources>

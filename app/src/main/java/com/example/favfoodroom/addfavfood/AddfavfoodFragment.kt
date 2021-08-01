@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.favfoodroom.R
 import com.example.favfoodroom.database.FoodDatabase
 import com.example.favfoodroom.databinding.FragmentAddfavfoodBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 class AddfavfoodFragment : Fragment() {
@@ -48,6 +50,17 @@ class AddfavfoodFragment : Fragment() {
                 viewModel.updateFoodHolderValue()
                 viewModel.putFoodHolderValueToFalse()
 
+            }
+        })
+
+        viewModel.showSnackBarEvent.observe(viewLifecycleOwner, {
+            if (it == true) { // Observed state is true.
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.Added_message),
+                    Snackbar.LENGTH_SHORT // How long to display the message.
+                ).show()
+                viewModel.doneShowingSnackbar()
             }
         })
 

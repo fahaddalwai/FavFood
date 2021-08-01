@@ -11,6 +11,8 @@ val database: FoodDatabaseDao,
 application: Application
 ) : AndroidViewModel(application) {
 
+    val allFood=database.getAllFood()
+
     // Event action which triggers the end of the all facts and tells whether to go start fragment or not
     private val _eventStartPressed = MutableLiveData<Boolean>()
     val eventStartPressed: LiveData<Boolean>
@@ -27,6 +29,17 @@ application: Application
 
     init{
         setEventStartPressedToFalse()
+    }
+
+    fun onClear() {
+        viewModelScope.launch {
+            clear()
+        }
+    }
+
+    suspend fun clear() {
+        database.clear()
+
     }
 
 }

@@ -24,4 +24,9 @@ interface FoodDatabaseDao {
     @Query("SELECT * FROM Food ORDER BY Id DESC LIMIT 1")   //return night with value 1
     suspend fun getFood(): Food?
 
+
+    @Query("SELECT * FROM Food ORDER BY Id DESC")         //return all the nights as a list
+    fun getAllFood(): LiveData<List<Food>>
+
+
 }

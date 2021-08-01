@@ -25,7 +25,14 @@ class AddfavfoodViewModel(
     var food = MutableLiveData<String>()
 
 
+    private var _showSnackbarEvent = MutableLiveData<Boolean>()
 
+    val showSnackBarEvent: LiveData<Boolean>
+        get() = _showSnackbarEvent
+
+    fun doneShowingSnackbar() {
+        _showSnackbarEvent.value = false
+    }
 
 
     private val _putFoodHolderValue = MutableLiveData<Boolean>()                  //encapsulating it
@@ -70,7 +77,7 @@ class AddfavfoodViewModel(
 
     private suspend fun insert(newFood: Food) {
         database.insert(newFood)
-
+        _showSnackbarEvent.value=true
 
     }
 

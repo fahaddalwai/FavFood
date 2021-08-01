@@ -20,7 +20,7 @@
             android:id="@+id/foodTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_food_and_person_to_show"
+            android:text="@{viewfavfoodViewModel.allFood.toString()}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +50,7 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/dark"
             android:text="@string/clear_entries"
+            android:onClick="@{() -> viewfavfoodViewModel.onClear()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
