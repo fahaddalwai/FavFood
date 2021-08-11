@@ -13,7 +13,17 @@ class AddfavfoodViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
+    private val _goBackToPrevActivity = MutableLiveData<Boolean>()
+    val goBackToPrevActivity: LiveData<Boolean>
+        get() = _goBackToPrevActivity
 
+    fun setEventGoBackToFalse(){
+        _goBackToPrevActivity.value=false
+    }
+
+    fun setEventGoBackToTrue(){
+        _goBackToPrevActivity.value=true
+    }
 
     // The current fact
     var name = MutableLiveData<String>()
@@ -41,6 +51,7 @@ class AddfavfoodViewModel(
 
     init{
         putFoodHolderValueToFalse()
+        setEventGoBackToFalse()
     }
 
     fun putFoodHolderValueToTrue(){
@@ -78,7 +89,7 @@ class AddfavfoodViewModel(
     private suspend fun insert(newFood: Food) {
         database.insert(newFood)
         _showSnackbarEvent.value=true
-
+        setEventGoBackToTrue()
     }
 
 

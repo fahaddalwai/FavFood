@@ -41,6 +41,14 @@ class ViewfavfoodFragment : Fragment() {
         binding.viewfavfoodViewModel = viewModel
         binding.lifecycleOwner = this
 
+        val adapter=ViewAllAdapter()
+        binding.recyclerView.adapter=adapter
+
+        viewModel.allFood.observe(viewLifecycleOwner,{
+            it?.let{
+                adapter.submitList(it)
+            }
+        })
 
         viewModel.eventStartPressed.observe(viewLifecycleOwner, {
             if(it){

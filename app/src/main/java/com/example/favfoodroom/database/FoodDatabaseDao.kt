@@ -16,8 +16,6 @@ interface FoodDatabaseDao {
     suspend fun update(food:Food)              //update food data item
 
 
-
-
     @Query("DELETE FROM Food")
     suspend fun clear()
 

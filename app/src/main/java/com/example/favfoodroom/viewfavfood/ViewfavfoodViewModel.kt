@@ -11,7 +11,10 @@ val database: FoodDatabaseDao,
 application: Application
 ) : AndroidViewModel(application) {
 
-    val allFood=database.getAllFood()
+    val allFood=database.getAllFood()       //Room uses a background thread for queries which returns LiveData
+
+
+
 
     // Event action which triggers the end of the all facts and tells whether to go start fragment or not
     private val _eventStartPressed = MutableLiveData<Boolean>()

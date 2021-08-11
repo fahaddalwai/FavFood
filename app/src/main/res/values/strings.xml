@@ -6,5 +6,8 @@
     <string name="add_entry">Add entry</string>
     <string name="clear_entries">clear entries</string>
     <string name="Added_message">entry has been added</string>
+    <string name="num">123456</string>
+    <string name="name">Fahad</string>
+    <string name="food">Hummus</string>
 
 </resources>

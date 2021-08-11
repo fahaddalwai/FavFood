@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/addfavfoodFragment"
         android:name="com.example.favfoodroom.addfavfood.AddfavfoodFragment"
-        android:label="AddfavfoodFragment" />
+        android:label="AddfavfoodFragment" >
+        <action
+            android:id="@+id/action_addfavfoodFragment_to_viewfavfoodFragment"
+            app:destination="@id/viewfavfoodFragment" />
+    </fragment>
     <fragment
         android:id="@+id/viewfavfoodFragment"
         android:name="com.example.favfoodroom.viewfavfood.ViewfavfoodFragment"

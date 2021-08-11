@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.favfoodroom.R
 import com.example.favfoodroom.database.FoodDatabase
 import com.example.favfoodroom.databinding.FragmentAddfavfoodBinding
@@ -64,7 +65,19 @@ class AddfavfoodFragment : Fragment() {
             }
         })
 
+
+        viewModel.goBackToPrevActivity.observe(viewLifecycleOwner,{
+            if(it){
+                goToPrevFragment()
+            }
+        })
+
         return binding.root
+    }
+
+    fun goToPrevFragment() {
+        findNavController().navigate(R.id.action_addfavfoodFragment_to_viewfavfoodFragment)
+        viewModel.setEventGoBackToFalse()
     }
 
 
