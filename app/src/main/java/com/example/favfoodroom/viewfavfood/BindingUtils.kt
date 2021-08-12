@@ -3,6 +3,7 @@ package com.example.favfoodroom.viewfavfood
 import android.util.Log
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.favfoodroom.database.Food
 
 @BindingAdapter("Id")
@@ -29,4 +30,14 @@ fun TextView.setFavFood(item: Food?) {
         text=item.FavFood
         Log.i("food",text as String)
     }
+}
+
+
+@BindingAdapter("listData")                         //here we don't do observe in fragment to change list but instead connect list data directly to the viewModel
+fun bindRecyclerView(recyclerView: RecyclerView,
+                     data: List<Food>?) {
+
+    val adapter = recyclerView.adapter as ViewAllAdapter
+    adapter.submitList(data)
+
 }

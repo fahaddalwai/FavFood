@@ -13,7 +13,10 @@ application: Application
 
     val allFood=database.getAllFood()       //Room uses a background thread for queries which returns LiveData
 
-
+    val allFoodZ:LiveData<List<Food>>
+        get() {
+            return allFood
+        }
 
 
     // Event action which triggers the end of the all facts and tells whether to go start fragment or not
