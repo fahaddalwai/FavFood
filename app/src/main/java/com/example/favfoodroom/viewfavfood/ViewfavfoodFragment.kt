@@ -49,12 +49,23 @@ class ViewfavfoodFragment : Fragment() {
         // to all the data in the ViewModel
         binding.viewfavfoodViewModel = viewModel
         binding.lifecycleOwner = this
-        binding.recyclerView.adapter = ViewAllAdapter()
 
+
+        binding.recyclerView.adapter = ViewAllAdapter(ViewAllAdapter.ClickListener{
+            viewModel.putValueToFoodItem(it)
+        })
+
+
+        viewModel.foodItem.observe(viewLifecycleOwner,{
+            it?.let{
+                findNavController().navigate(ViewfavfoodFragmentDirections.actionViewfavfoodFragmentToDetailsFragment(it))
+                viewModel.SetFoodItemAsNull()
+            }
+        })
 
         viewModel.eventStartPressed.observe(viewLifecycleOwner, {
             if(it){
-                gotoNextFragment()
+                gotoAddFragment()
             }
         })
 
@@ -63,8 +74,11 @@ class ViewfavfoodFragment : Fragment() {
         return binding.root
 
     }
+    
 
-    private fun gotoNextFragment() {
+    
+
+    private fun gotoAddFragment() {
         findNavController().navigate(R.id.action_viewfavfoodFragment_to_addfavfoodFragment)
         viewModel.setEventStartPressedToFalse()
     }

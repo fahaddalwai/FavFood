@@ -4,6 +4,7 @@
     android:id="@+id/navigation"
     app:startDestination="@id/viewfavfoodFragment">
 
+
     <fragment
         android:id="@+id/addfavfoodFragment"
         android:name="com.example.favfoodroom.addfavfood.AddfavfoodFragment"
@@ -19,5 +20,18 @@
         <action
             android:id="@+id/action_viewfavfoodFragment_to_addfavfoodFragment"
             app:destination="@id/addfavfoodFragment" />
+        <action
+            android:id="@+id/action_viewfavfoodFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.favfoodroom.details.DetailsFragment"
+        android:label="DetailsFragment">
+        <argument
+            android:name="FoodItem"
+            app:argType="com.example.favfoodroom.database.Food"
+            />
+    </fragment>
+
 </navigation>

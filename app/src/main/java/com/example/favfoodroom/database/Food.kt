@@ -1,10 +1,16 @@
 package com.example.favfoodroom.database
 
+
+
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
+
 
 @Entity
+@Parcelize
 data class Food(
 
     @PrimaryKey(autoGenerate = true)
@@ -19,6 +25,13 @@ data class Food(
     @ColumnInfo(name = "Food URL")
     var URL: String? ="none",
 
-    )
+    @ColumnInfo(name= "Created Date")
+    var date:String?="not set"
+    ): Parcelable
+
+
+
+
+
 
 

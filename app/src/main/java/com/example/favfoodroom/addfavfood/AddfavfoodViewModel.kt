@@ -19,19 +19,16 @@ class AddfavfoodViewModel(
     val goBackToPrevActivity: LiveData<Boolean>
         get() = _goBackToPrevActivity
 
-    fun setEventGoBackToFalse(){
-        _goBackToPrevActivity.value=false
+    fun setEventGoBackToFalse() {
+        _goBackToPrevActivity.value = false
     }
 
-    fun setEventGoBackToTrue(){
-        _goBackToPrevActivity.value=true
+    fun setEventGoBackToTrue() {
+        _goBackToPrevActivity.value = true
     }
 
     // The current fact
     var name = MutableLiveData<String>()
-
-
-
 
 
     var food = MutableLiveData<String>()
@@ -51,47 +48,45 @@ class AddfavfoodViewModel(
     val putFoodHolderValue: LiveData<Boolean>
         get() = _putFoodHolderValue
 
-    init{
+    init {
         putFoodHolderValueToFalse()
         setEventGoBackToFalse()
     }
 
-    fun putFoodHolderValueToTrue(){
+    fun putFoodHolderValueToTrue() {
         _putFoodHolderValue.value = true
     }
 
-    fun putFoodHolderValueToFalse(){
+    fun putFoodHolderValueToFalse() {
         _putFoodHolderValue.value = false
     }
-
 
 
     var foodHolder = Food()
 
 
+    var photoURL: String = "nothing"
+    var photoDate:String="nothing"
 
-    var photo: String = "nothing"
 
-
-    fun updateFoodHolderValue(){
-        foodHolder.Name=name.value
-        foodHolder.FavFood=food.value
-        getUrlPhoto(food.value.toString())
+    fun updateFoodHolderValue() {
+        foodHolder.Name = name.value
+        foodHolder.FavFood = food.value
+        getUrlAndDatePhoto(food.value.toString())
     }
 
-    fun getUrlPhoto(item:String){
-        viewModelScope.launch{
+    fun getUrlAndDatePhoto(item: String) {
+        viewModelScope.launch {
             try {
-                val photoGetter= FoodApi.retrofitService.getPhoto(item)
-                photo=photoGetter.urls.regular
+                val photoGetter = FoodApi.retrofitService.getPhoto(item)
 
-                foodHolder.URL=photo
+                foodHolder.URL = photoGetter.urls.regular
+                foodHolder.date=photoGetter.createdAt
 
-                Log.i("value", photo)
+                Log.i("value", photoURL)
                 enterData()
-            }
-            catch (e: Exception){
-                Log.i("error",e.toString())
+            } catch (e: Exception) {
+                Log.i("error", e.toString())
             }
         }
     }
@@ -108,12 +103,9 @@ class AddfavfoodViewModel(
 
     private suspend fun insert(newFood: Food) {
         database.insert(newFood)
-        _showSnackbarEvent.value=true
+        _showSnackbarEvent.value = true
         setEventGoBackToTrue()
     }
-
-
-
 
 
 }

@@ -7,11 +7,16 @@
         <variable
             name="food"
             type="com.example.favfoodroom.database.Food"/>
+
+        <variable
+            name="clickListener"
+            type="com.example.favfoodroom.viewfavfood.ViewAllAdapter.ClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(food)}">
 
         <TextView
             android:id="@+id/foodIdTextView"

@@ -9,5 +9,6 @@
     <string name="num">123456</string>
     <string name="name">Fahad</string>
     <string name="food">Hummus</string>
+    <string name="placeholder_text">PlaceHolder text</string>
 
 </resources>

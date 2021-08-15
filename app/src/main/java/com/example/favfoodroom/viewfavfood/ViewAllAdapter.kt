@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.favfoodroom.database.Food
 import com.example.favfoodroom.databinding.FoodListItemBinding
 
-class ViewAllAdapter() : ListAdapter<Food, ViewAllAdapter.ViewHolder>(SleepNightDiffCallback()) {
+class ViewAllAdapter(val clickListener: ClickListener) : ListAdapter<Food, ViewAllAdapter.ViewHolder>(SleepNightDiffCallback()) {
 
     class ViewHolder private constructor(val binding: FoodListItemBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: Food) {
+        fun bind(item: Food, clickListener: ClickListener) {
             binding.food = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -28,16 +29,24 @@ class ViewAllAdapter() : ListAdapter<Food, ViewAllAdapter.ViewHolder>(SleepNight
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position)!!)
+        val food=getItem(position)!!
+
+
+
+        holder.bind(food,clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
-
+    class ClickListener(val clickListener: (food: Food) -> Unit) {
+        fun onClick(food: Food) = clickListener(food)
+    }
 
 }
+
+
 
 
 class SleepNightDiffCallback : DiffUtil.ItemCallback<Food>() {
@@ -49,5 +58,8 @@ class SleepNightDiffCallback : DiffUtil.ItemCallback<Food>() {
     override fun areContentsTheSame(oldItem: Food, newItem: Food): Boolean {
         return oldItem == newItem
     }
+
 }
+
+
 

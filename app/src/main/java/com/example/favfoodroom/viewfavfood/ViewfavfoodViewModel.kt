@@ -22,9 +22,17 @@ application: Application
         }
 
 
+    private val _foodItem= MutableLiveData<Food>()
+    val foodItem: LiveData<Food>
+        get() = _foodItem
 
+    fun putValueToFoodItem(food: Food) {
+        _foodItem.value = food
+    }
 
-
+    fun SetFoodItemAsNull(){
+        _foodItem.value = null
+    }
 
 
 
@@ -45,6 +53,7 @@ application: Application
 
     init{
         setEventStartPressedToFalse()
+        SetFoodItemAsNull()
     }
 
     fun onClear() {
