@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.favfoodroom.database.Food
 import com.example.favfoodroom.database.FoodDatabaseDao
+import com.example.favfoodroom.network.FoodApi
+import com.example.favfoodroom.network.Photo
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -67,17 +69,35 @@ class AddfavfoodViewModel(
     var foodHolder = Food()
 
 
+
+    var photo: String = "nothing"
+
+
     fun updateFoodHolderValue(){
         foodHolder.Name=name.value
         foodHolder.FavFood=food.value
-        enterData()
+        getUrlPhoto(food.value.toString())
+    }
+
+    fun getUrlPhoto(item:String){
+        viewModelScope.launch{
+            try {
+                val photoGetter= FoodApi.retrofitService.getPhoto(item)
+                photo=photoGetter.urls.regular
+
+                foodHolder.URL=photo
+
+                Log.i("value", photo)
+                enterData()
+            }
+            catch (e: Exception){
+                Log.i("error",e.toString())
+            }
+        }
     }
 
 
     private fun enterData() {
-
-
-
         viewModelScope.launch {
             insert(foodHolder)
 

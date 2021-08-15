@@ -14,7 +14,6 @@ class ViewAllAdapter() : ListAdapter<Food, ViewAllAdapter.ViewHolder>(SleepNight
 
         fun bind(item: Food) {
             binding.food = item
-
             binding.executePendingBindings()
         }
 

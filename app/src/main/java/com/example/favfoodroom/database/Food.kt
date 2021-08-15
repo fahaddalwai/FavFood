@@ -16,6 +16,9 @@ data class Food(
     @ColumnInfo(name = "Food Name")
     var FavFood: String? ="default",
 
+    @ColumnInfo(name = "Food URL")
+    var URL: String? ="none",
+
     )
 
 

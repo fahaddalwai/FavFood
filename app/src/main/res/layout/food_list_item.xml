@@ -19,40 +19,46 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:text="@string/num"
             android:textSize="24sp"
             app:Id="@{food}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/nameIdTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/name"
             android:textSize="24sp"
             app:Name="@{food}"
-            app:layout_constraintBottom_toBottomOf="@+id/foodIdTextView"
-            app:layout_constraintStart_toEndOf="@+id/foodIdTextView"
+            app:layout_constraintStart_toEndOf="@+id/favFoodTextView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/favFoodTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:gravity="left"
             android:text="@string/food"
             android:textSize="24sp"
             app:FavFood="@{food}"
-            app:layout_constraintBottom_toBottomOf="@+id/nameIdTextView"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/foodIdTextView"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/FoodImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:imageUrl="@{food.URL}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameIdTextView"
+            tools:srcCompat="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
