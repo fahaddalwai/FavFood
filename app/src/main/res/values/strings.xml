@@ -10,5 +10,6 @@
     <string name="name">Fahad</string>
     <string name="food">Hummus</string>
     <string name="placeholder_text">PlaceHolder text</string>
+    <string name="food_image">Food Image</string>
 
 </resources>

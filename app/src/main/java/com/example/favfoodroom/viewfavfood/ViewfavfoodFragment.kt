@@ -59,7 +59,7 @@ class ViewfavfoodFragment : Fragment() {
         viewModel.foodItem.observe(viewLifecycleOwner,{
             it?.let{
                 findNavController().navigate(ViewfavfoodFragmentDirections.actionViewfavfoodFragmentToDetailsFragment(it))
-                viewModel.SetFoodItemAsNull()
+                viewModel.setFoodItemAsNull()
             }
         })
 

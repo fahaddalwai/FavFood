@@ -23,7 +23,7 @@ abstract class FoodDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         FoodDatabase::class.java,
-                        "sleep_history_database"
+                        "food_history_database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

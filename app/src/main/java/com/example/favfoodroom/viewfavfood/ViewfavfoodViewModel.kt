@@ -2,11 +2,12 @@ package com.example.favfoodroom.viewfavfood
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.favfoodroom.database.Food
 import com.example.favfoodroom.database.FoodDatabaseDao
-import com.example.favfoodroom.network.FoodApi
-import com.example.favfoodroom.network.Photo
 import kotlinx.coroutines.launch
 
 class ViewfavfoodViewModel(
@@ -30,7 +31,7 @@ application: Application
         _foodItem.value = food
     }
 
-    fun SetFoodItemAsNull(){
+    fun setFoodItemAsNull(){
         _foodItem.value = null
     }
 
@@ -52,8 +53,9 @@ application: Application
     }
 
     init{
+
         setEventStartPressedToFalse()
-        SetFoodItemAsNull()
+        setFoodItemAsNull()
     }
 
     fun onClear() {

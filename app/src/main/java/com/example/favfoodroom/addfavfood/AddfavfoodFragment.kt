@@ -8,11 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.favfoodroom.R
 import com.example.favfoodroom.database.FoodDatabase
 import com.example.favfoodroom.databinding.FragmentAddfavfoodBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 
 class AddfavfoodFragment : Fragment() {
@@ -39,7 +41,9 @@ class AddfavfoodFragment : Fragment() {
 
 
 
-        // Set the viewmodel for databinding - this allows the bound layout access
+
+
+        // Set the viewModel for databinding - this allows the bound layout access
         // to all the data in the ViewModel
 
         binding.addfavfoodViewModel = viewModel
@@ -53,6 +57,8 @@ class AddfavfoodFragment : Fragment() {
 
             }
         })
+
+
 
         viewModel.showSnackBarEvent.observe(viewLifecycleOwner, {
             if (it == true) { // Observed state is true.

@@ -3,9 +3,11 @@ package com.example.favfoodroom.database
 
 
 import android.os.Parcelable
+import androidx.lifecycle.Transformations.map
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.favfoodroom.network.Photo
 import kotlinx.android.parcel.Parcelize
 
 
@@ -28,6 +30,9 @@ data class Food(
     @ColumnInfo(name= "Created Date")
     var date:String?="not set"
     ): Parcelable
+
+
+
 
 
 

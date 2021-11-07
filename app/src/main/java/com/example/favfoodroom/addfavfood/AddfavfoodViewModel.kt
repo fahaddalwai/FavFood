@@ -2,12 +2,13 @@ package com.example.favfoodroom.addfavfood
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.favfoodroom.database.Food
 import com.example.favfoodroom.database.FoodDatabaseDao
 import com.example.favfoodroom.network.FoodApi
-import com.example.favfoodroom.network.Photo
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class AddfavfoodViewModel(
@@ -65,30 +66,31 @@ class AddfavfoodViewModel(
     var foodHolder = Food()
 
 
-    var photoURL: String = "nothing"
-    var photoDate:String="nothing"
+
 
 
     fun updateFoodHolderValue() {
         foodHolder.Name = name.value
         foodHolder.FavFood = food.value
-        getUrlAndDatePhoto(food.value.toString())
+        setUrlAndDatePhoto(food.value.toString())
     }
 
-    fun getUrlAndDatePhoto(item: String) {
+    fun setUrlAndDatePhoto(item: String)  {
+
+
         viewModelScope.launch {
             try {
-                val photoGetter = FoodApi.retrofitService.getPhoto(item)
+                val photoAndDateGetter = FoodApi.retrofitService.getPhoto(item)
 
-                foodHolder.URL = photoGetter.urls.regular
-                foodHolder.date=photoGetter.createdAt
+                foodHolder.URL = photoAndDateGetter.urls.regular
+                foodHolder.date=photoAndDateGetter.createdAt
 
-                Log.i("value", photoURL)
                 enterData()
             } catch (e: Exception) {
                 Log.i("error", e.toString())
             }
         }
+
     }
 
 
