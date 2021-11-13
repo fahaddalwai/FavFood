@@ -6,8 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.favfoodroom.database.Food
 
-class DetailsViewModel(food: Food,
-                      app: Application
+class DetailsViewModel(
+    food: Food,
+    app: Application
 ) : AndroidViewModel(app) {
 
     private val _selectedFood = MutableLiveData<Food>()

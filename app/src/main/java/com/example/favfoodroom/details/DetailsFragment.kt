@@ -21,19 +21,20 @@ class DetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding= DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
 
         val application = requireNotNull(activity).application
         val food = DetailsFragmentArgs.fromBundle(requireArguments()).foodItem
 
-        Log.i("asf",food.toString())
+
         binding.lifecycleOwner = this
 
 
         val viewModelFactory = DetailsViewModelFactory(food, application)
         binding.viewModel = ViewModelProvider(
-            this, viewModelFactory).get(DetailsViewModel::class.java)
+            this, viewModelFactory
+        ).get(DetailsViewModel::class.java)
 
         return binding.root
     }
