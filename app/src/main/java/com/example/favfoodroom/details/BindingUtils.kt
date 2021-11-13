@@ -22,7 +22,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 @BindingAdapter("dateCreated")
 fun TextView.setDate(item: Food?) {
     item?.let {
-        text=item.date
+        text = item.date
         Log.i("yooooo", item.toString())
     }
 }

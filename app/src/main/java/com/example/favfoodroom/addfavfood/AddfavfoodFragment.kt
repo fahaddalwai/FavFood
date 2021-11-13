@@ -6,15 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.favfoodroom.R
 import com.example.favfoodroom.database.FoodDatabase
 import com.example.favfoodroom.databinding.FragmentAddfavfoodBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
 
 
 class AddfavfoodFragment : Fragment() {
@@ -37,13 +34,10 @@ class AddfavfoodFragment : Fragment() {
             ViewModelProvider(
                 this,
                 viewModelFactory
-            ).get(AddfavfoodViewModel::class.java)      //define instance of viewmodel using provider
+            ).get(AddfavfoodViewModel::class.java)
 
 
-
-
-
-        // Set the viewModel for databinding - this allows the bound layout access
+        // Set the viewModel for data binding - this allows the bound layout access
         // to all the data in the ViewModel
 
         binding.addfavfoodViewModel = viewModel
@@ -51,7 +45,7 @@ class AddfavfoodFragment : Fragment() {
 
 
         viewModel.putFoodHolderValue.observe(viewLifecycleOwner, {
-            if(it){
+            if (it) {
                 viewModel.updateFoodHolderValue()
                 viewModel.putFoodHolderValueToFalse()
 
@@ -72,16 +66,18 @@ class AddfavfoodFragment : Fragment() {
         })
 
 
-        viewModel.goBackToPrevActivity.observe(viewLifecycleOwner,{
-            if(it){
+        viewModel.goBackToPrevActivity.observe(viewLifecycleOwner, {
+            if (it) {
                 goToPrevFragment()
             }
         })
 
+
+
         return binding.root
     }
 
-    fun goToPrevFragment() {
+    private fun goToPrevFragment() {
         findNavController().navigate(R.id.action_addfavfoodFragment_to_viewfavfoodFragment)
         viewModel.setEventGoBackToFalse()
     }

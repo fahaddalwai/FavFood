@@ -22,7 +22,7 @@ fun TextView.setId(item: Food?) {
 fun TextView.setName(item: Food?) {
     item?.let {
         text = item.Name
-        Log.i("name",text as String)
+        Log.i("name", text as String)
     }
 }
 
@@ -30,8 +30,8 @@ fun TextView.setName(item: Food?) {
 @BindingAdapter("FavFood")
 fun TextView.setFavFood(item: Food?) {
     item?.let {
-        text=item.FavFood
-        Log.i("food",text as String)
+        text = item.FavFood
+        Log.i("food", text as String)
     }
 }
 
@@ -47,10 +47,11 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 }
 
 
-
 @BindingAdapter("listData")                         //here we don't do observe in fragment to change list but instead connect list data directly to the viewModel
-fun bindRecyclerView(recyclerView: RecyclerView,
-                     data: List<Food>?) {
+fun bindRecyclerView(
+    recyclerView: RecyclerView,
+    data: List<Food>?
+) {
 
     val adapter = recyclerView.adapter as ViewAllAdapter
     adapter.submitList(data)

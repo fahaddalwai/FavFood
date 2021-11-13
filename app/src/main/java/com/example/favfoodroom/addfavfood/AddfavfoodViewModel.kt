@@ -24,11 +24,11 @@ class AddfavfoodViewModel(
         _goBackToPrevActivity.value = false
     }
 
-    fun setEventGoBackToTrue() {
+    private fun setEventGoBackToTrue() {
         _goBackToPrevActivity.value = true
     }
 
-    // The current fact
+    // The current name of person
     var name = MutableLiveData<String>()
 
 
@@ -45,7 +45,7 @@ class AddfavfoodViewModel(
     }
 
 
-    private val _putFoodHolderValue = MutableLiveData<Boolean>()                  //encapsulating it
+    private val _putFoodHolderValue = MutableLiveData<Boolean>()
     val putFoodHolderValue: LiveData<Boolean>
         get() = _putFoodHolderValue
 
@@ -63,10 +63,7 @@ class AddfavfoodViewModel(
     }
 
 
-    var foodHolder = Food()
-
-
-
+    private var foodHolder = Food()
 
 
     fun updateFoodHolderValue() {
@@ -75,7 +72,7 @@ class AddfavfoodViewModel(
         setUrlAndDatePhoto(food.value.toString())
     }
 
-    fun setUrlAndDatePhoto(item: String)  {
+    private fun setUrlAndDatePhoto(item: String) {
 
 
         viewModelScope.launch {
@@ -83,7 +80,7 @@ class AddfavfoodViewModel(
                 val photoAndDateGetter = FoodApi.retrofitService.getPhoto(item)
 
                 foodHolder.URL = photoAndDateGetter.urls.regular
-                foodHolder.date=photoAndDateGetter.createdAt
+                foodHolder.date = photoAndDateGetter.createdAt
 
                 enterData()
             } catch (e: Exception) {
