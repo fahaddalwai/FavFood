@@ -10,10 +10,10 @@ import androidx.room.Update
 interface FoodDatabaseDao {
 
     @Insert
-    suspend fun insert(food: com.example.favfoodroom.database.Food)              //insert a food data item
+    suspend fun insert(food: Food)              //insert a food data item
 
     @Update
-    suspend fun update(food:Food)              //update food data item
+    suspend fun update(food: Food)              //update food data item
 
 
     @Query("DELETE FROM Food")
@@ -25,7 +25,6 @@ interface FoodDatabaseDao {
 
     @Query("SELECT * FROM Food ORDER BY Id DESC")         //return all the nights as a list
     fun getAllFood(): LiveData<List<Food>>
-
 
 
 }
