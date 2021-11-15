@@ -1,20 +1,13 @@
 package com.example.favfoodroom.addfavfood
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.favfoodroom.repository.Repository
 import com.example.favfoodroom.database.Food
-import com.example.favfoodroom.database.FoodDatabaseDao
 import com.example.favfoodroom.network.FoodApi
 import kotlinx.coroutines.launch
 
-class AddfavfoodViewModel(
-    val database: FoodDatabaseDao,
-    application: Application
-) : AndroidViewModel(application) {
+class AddfavfoodViewModel(private val repository: Repository) : ViewModel(){
 
     private val _goBackToPrevActivity = MutableLiveData<Boolean>()
     val goBackToPrevActivity: LiveData<Boolean>
@@ -101,7 +94,7 @@ class AddfavfoodViewModel(
 
 
     private suspend fun insert(newFood: Food) {
-        database.insert(newFood)
+        repository.insert(newFood)
         _showSnackbarEvent.value = true
         setEventGoBackToTrue()
     }

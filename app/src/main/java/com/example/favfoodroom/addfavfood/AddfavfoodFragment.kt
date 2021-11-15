@@ -9,15 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.favfoodroom.R
+import com.example.favfoodroom.repository.Repository
 import com.example.favfoodroom.database.FoodDatabase
 import com.example.favfoodroom.databinding.FragmentAddfavfoodBinding
 import com.google.android.material.snackbar.Snackbar
 
 
-class AddfavfoodFragment : Fragment() {
+class
+
+
+AddfavfoodFragment : Fragment() {
 
     private lateinit var binding: FragmentAddfavfoodBinding
-    private lateinit var viewModel: AddfavfoodViewModel
+    lateinit var viewModel: AddfavfoodViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,8 +32,9 @@ class AddfavfoodFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = FoodDatabase.getInstance(application).foodDatabaseDao
+        val repository= Repository(dataSource)
 
-        val viewModelFactory = AddfavfoodViewModelFactory(dataSource, application)
+        val viewModelFactory = AddfavfoodViewModelFactory(repository)
         viewModel =
             ViewModelProvider(
                 this,

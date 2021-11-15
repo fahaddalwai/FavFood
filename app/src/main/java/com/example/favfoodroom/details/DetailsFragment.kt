@@ -24,14 +24,14 @@ class DetailsFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
 
-        val application = requireNotNull(activity).application
+
         val food = DetailsFragmentArgs.fromBundle(requireArguments()).foodItem
 
 
         binding.lifecycleOwner = this
 
 
-        val viewModelFactory = DetailsViewModelFactory(food, application)
+        val viewModelFactory = DetailsViewModelFactory(food)
         binding.viewModel = ViewModelProvider(
             this, viewModelFactory
         ).get(DetailsViewModel::class.java)

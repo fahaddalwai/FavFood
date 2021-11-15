@@ -1,17 +1,15 @@
 package com.example.favfoodroom.addfavfood
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.favfoodroom.database.FoodDatabaseDao
+import com.example.favfoodroom.repository.Repository
 
-class AddfavfoodViewModelFactory(private val dataSource: FoodDatabaseDao,
-                                          private val application: Application
+class AddfavfoodViewModelFactory(private val repository: Repository
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AddfavfoodViewModel::class.java)) {
-            return AddfavfoodViewModel(dataSource, application) as T
+            return AddfavfoodViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

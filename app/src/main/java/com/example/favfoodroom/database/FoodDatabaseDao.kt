@@ -19,7 +19,7 @@ interface FoodDatabaseDao {
     @Query("DELETE FROM Food")
     suspend fun clear()
 
-    @Query("SELECT * FROM Food ORDER BY Id DESC LIMIT 1")   //return night with value 1
+    @Query("SELECT * FROM Food ORDER BY Id DESC LIMIT 1")   //return night with value '1'
     suspend fun getFood(): Food?
 
 

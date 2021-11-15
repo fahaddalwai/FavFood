@@ -1,28 +1,24 @@
 package com.example.favfoodroom.viewfavfood
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.favfoodroom.R
+import com.example.favfoodroom.repository.Repository
 import com.example.favfoodroom.database.FoodDatabase
 import com.example.favfoodroom.databinding.FragmentViewfavfoodBinding
-import com.example.favfoodroom.network.FoodApi
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import javax.inject.Inject
 
 class ViewfavfoodFragment : Fragment() {
 
     private lateinit var binding: FragmentViewfavfoodBinding
-    private lateinit var viewModel: ViewfavfoodViewModel
+    @Inject
+    lateinit var viewModel: ViewfavfoodViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,18 +27,16 @@ class ViewfavfoodFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_viewfavfood, container, false)
 
 
-
-
         val application = requireNotNull(this.activity).application
         val dataSource = FoodDatabase.getInstance(application).foodDatabaseDao
+        val repository = Repository(dataSource)
 
-        val viewModelFactory = ViewfavfoodViewModelFactory(dataSource, application)
+        val viewModelFactory = ViewfavfoodViewModelFactory(repository)
         viewModel =
             ViewModelProvider(
                 this,
                 viewModelFactory
             ).get(ViewfavfoodViewModel::class.java)      //define instance of viewmodel using provider
-
 
 
         // Set the viewmodel for databinding - this allows the bound layout access
@@ -51,20 +45,24 @@ class ViewfavfoodFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-        binding.recyclerView.adapter = ViewAllAdapter(ViewAllAdapter.ClickListener{
+        binding.recyclerView.adapter = ViewAllAdapter(ViewAllAdapter.ClickListener {
             viewModel.putValueToFoodItem(it)
         })
 
 
-        viewModel.foodItem.observe(viewLifecycleOwner,{
-            it?.let{
-                findNavController().navigate(ViewfavfoodFragmentDirections.actionViewfavfoodFragmentToDetailsFragment(it))
+        viewModel.foodItem.observe(viewLifecycleOwner, {
+            it?.let {
+                findNavController().navigate(
+                    ViewfavfoodFragmentDirections.actionViewfavfoodFragmentToDetailsFragment(
+                        it
+                    )
+                )
                 viewModel.setFoodItemAsNull()
             }
         })
 
         viewModel.eventStartPressed.observe(viewLifecycleOwner, {
-            if(it){
+            if (it) {
                 gotoAddFragment()
             }
         })
@@ -74,9 +72,7 @@ class ViewfavfoodFragment : Fragment() {
         return binding.root
 
     }
-    
 
-    
 
     private fun gotoAddFragment() {
         findNavController().navigate(R.id.action_viewfavfoodFragment_to_addfavfoodFragment)
